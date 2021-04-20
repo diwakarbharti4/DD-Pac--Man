@@ -10,10 +10,10 @@ class MainEngine(object):
 
         # initialize tkinter window parameters
         self.root = Tk()
-        self.root.title("DD Pac-Man")
+        self.root.title("Pac-Man")
         self.root.geometry("480x640")
+        self.root.iconbitmap('dd.ico')
         self.root.resizable(0, 0)
-        self.root.configure(bg='LightBlue1')
 
         # initialize some engine variables
         self.currentLv = 1              # default: level 1
@@ -86,6 +86,7 @@ class MainEngine(object):
         self.DD5 = Label(self.root, text=" made by ",font=("Comic Sans MS",25,"bold"),borderwidth=2,relief="groove")
         self.DD6 = Label(self.root, text=" Deepak Sidar",font=("Comic Sans MS",15,"bold"),bg="thistle",borderwidth=2, relief="groove")
         self.DD7 = Label(self.root, text=" Diwakar Bharti",font=("Comic Sans MS",15,"bold"),bg="thistle",borderwidth=2, relief="groove")
+
         # initialize widgets for the game
         self.wGameLabelScore = Label(self.root, text=("Score: " + str(self.statusScore)))
         self.wGameLabelLife = Label(self.root, text=("Life: " + str(self.statusLife)))
@@ -107,7 +108,6 @@ class MainEngine(object):
         # call the next phase of initialization: level selection
         self.__initLevelSelect()
 
-
     def __initLevelSelect(self):
         ## level selection, showing all relevant widgets
         self.wLvLabel.pack()
@@ -124,7 +124,6 @@ class MainEngine(object):
 
         # execute the game
         self.root.mainloop()
-
 
     def lvSelect(self):
         try:
@@ -235,14 +234,14 @@ class MainEngine(object):
         # bind the sprite for the widget
         self.wGameCanv.itemconfig(self.wGameCanvLabelGetReady, image=self.wSprites['getready'])
 
-        if self.statusStartingTimer < 8:
+        if self.statusStartingTimer < 16:
             # blinking function
             if self.statusStartingTimer % 2 == 1:
                 self.wGameCanv.itemconfigure(self.wGameCanvLabelGetReady, state='normal')
             else:
                 self.wGameCanv.itemconfigure(self.wGameCanvLabelGetReady, state='hidden')
 
-        else:   # after 8 loop, the main game will be started with loopFunction
+        else:   # after 16 loop, the main game will be started with loopFunction
             self.gameStartingTrigger()
 
 
